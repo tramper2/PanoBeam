@@ -3,3 +3,5 @@ bin
 obj
 Release
 packages
+*.user
+*.suo
