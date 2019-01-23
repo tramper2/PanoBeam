@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="PanoBeam.BlendControls.CurveControl.CurveControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:curveControl="clr-namespace:PanoBeam.BlendControls.CurveControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="200">
+    <UserControl.Resources>
+        <curveControl:ControlPointVisibilityConverter x:Key="Converter" />
+        <Style TargetType="{x:Type curveControl:ControlPoint}">
+            <Setter Property="Width" Value="8"/>
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Margin" Value="-4"/>
+            <Setter Property="Background" Value="{Binding Path=Color, RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="Canvas.Left" Value="{Binding Path=Point.X, RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="Canvas.Top" Value="{Binding Path=Point.Y, RelativeSource={RelativeSource Self}}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type curveControl:ControlPoint}">
+                        <Canvas>
+                            <Ellipse Fill="{TemplateBinding Background}" 
+                                 Width="{TemplateBinding Width}" 
+                                 Height="{TemplateBinding Height}"
+                                 Stroke="Black"
+                                 StrokeThickness="1"
+                                 Visibility="{TemplateBinding PointType, Converter={StaticResource Converter}, ConverterParameter=Spline}" />
+                            <Rectangle Fill="{TemplateBinding Background}" 
+                                 Width="{TemplateBinding Width}" 
+                                 Height="{TemplateBinding Height}"
+                                 Stroke="Black"
+                                 StrokeThickness="1"
+                                 Visibility="{TemplateBinding PointType, Converter={StaticResource Converter}, ConverterParameter=Line}" />
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Loaded="Grid_Loaded">
+        <TextBox x:Name="TextBoxFocusCapture" Height="23" TextWrapping="Wrap" Text="" Width="120"/>
+        <Border BorderThickness="1" BorderBrush="Black" Height="202" Width="202">
+            <Canvas>
+                <Canvas Name="Canvas1" Width="200" Height="200" ContextMenuOpening="Canvas1_OnContextMenuOpening" MouseLeftButtonDown="Canvas1_OnMouseLeftButtonDown">
+                    <Image x:Name="PreviewImage"/>
+                    <Image x:Name="BlendImage"/>
+                </Canvas>
+            </Canvas>
+        </Border>
+        <!--<Image x:Name="Image1" Width="200" Height="200" Margin="0,250,0,0"/>-->
+    </Grid>
+</UserControl>

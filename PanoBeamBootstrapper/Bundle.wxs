@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Bundle Name="PanoBeam" Version="$(var.BuildVersion)" 
+          Manufacturer="alphasoft marco wittwer" 
+          UpgradeCode="d3adc90d-adc2-46e4-a073-15827441fb66"
+          IconSourceFile="IconPB.ico">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.HyperlinkLicense">
+      <bal:WixStandardBootstrapperApplication
+      LicenseUrl=""
+      xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+      LogoFile="IconPB.png"/>
+    </BootstrapperApplicationRef>
+
+    <Variable Name="InstallFolder" Type="string" Value="[ProgramFilesFolder]alphasoft marco wittwer\PanoBeam"/>
+    
+		<Chain>
+      <MsiPackage SourceFile="$(var.PanoBeamSetup.TargetPath)">
+        <MsiProperty Name="INSTALLLOCATION" Value="[InstallFolder]"/>
+      </MsiPackage>
+		</Chain>
+	</Bundle>
+</Wix>

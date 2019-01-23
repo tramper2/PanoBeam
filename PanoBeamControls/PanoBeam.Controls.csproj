@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F3083CC-7319-45AC-934D-DA116068210A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PanoBeam.Controls</RootNamespace>
+    <AssemblyName>PanoBeam.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accord.Imaging, Version=3.0.2.0, Culture=neutral, PublicKeyToken=fa1a88e29555ccf7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Accord.NET\Accord.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlendingUserControl.xaml.cs">
+      <DependentUpon>BlendingUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationUserControl.xaml.cs">
+      <DependentUpon>CalibrationUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationUserControlViewModel.cs" />
+    <Compile Include="CameraUserControl.xaml.cs">
+      <DependentUpon>CameraUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CameraUserControlViewModel.cs" />
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="ControlPointPositionControl.xaml.cs">
+      <DependentUpon>ControlPointPositionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPointsControl\ControlPointControl.xaml.cs">
+      <DependentUpon>ControlPointControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPointsControl\ControlPoint.cs" />
+    <Compile Include="ControlPointsControl\ControlPointsControl.xaml.cs">
+      <DependentUpon>ControlPointsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlPointsControl\ControlPointTypeConverter.cs" />
+    <Compile Include="ControlPointsControl\Delegates.cs" />
+    <Compile Include="ControlPointsControl\Enums.cs" />
+    <Compile Include="CroppingAdorner.cs" />
+    <Compile Include="DragCanvas.cs" />
+    <Compile Include="ProjectorContainer.cs" />
+    <Compile Include="PuncturedRect.cs" />
+    <Compile Include="RadioButtonCheckedConverter.cs" />
+    <Compile Include="TestImage.cs" />
+    <Compile Include="TestImagesUserControl.xaml.cs">
+      <DependentUpon>TestImagesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VersionConverter.cs" />
+    <Compile Include="ViewModelBase.cs" />
+    <Compile Include="WarpControl.xaml.cs">
+      <DependentUpon>WarpControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WarpInfoControl.xaml.cs">
+      <DependentUpon>WarpInfoControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="BlendingUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CalibrationUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CameraUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPointPositionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPointsControl\ControlPointControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlPointsControl\ControlPointsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestImagesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WarpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WarpInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PanoBeam.BlendControls\PanoBeam.BlendControls.csproj">
+      <Project>{0884ee2c-a2dc-42a7-9f27-cfa7c0e96b79}</Project>
+      <Name>PanoBeam.BlendControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PanoBeam.Common\PanoBeam.Common.csproj">
+      <Project>{491a81c7-2f1d-45db-b103-6a91a2ad87b4}</Project>
+      <Name>PanoBeam.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PanoBeam.Events\PanoBeam.Events.csproj">
+      <Project>{90f4b473-4b1d-4b75-a0d5-8b20251fdfe7}</Project>
+      <Name>PanoBeam.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PanoBeamConfiguration\PanoBeam.Configuration.csproj">
+      <Project>{9eb07904-14e6-444a-99c3-d9ebb5c09593}</Project>
+      <Name>PanoBeam.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PanoBeamLib\PanoBeamLib.csproj">
+      <Project>{834e96eb-09d2-40d0-8524-ab46a372ef44}</Project>
+      <Name>PanoBeamLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\02_Helligkeit.jpg" />
+    <Resource Include="Images\03_Kontrast.jpg" />
+    <Resource Include="Images\04_Farbe.jpg" />
+    <Resource Include="Images\blau.png" />
+    <Resource Include="Images\DSC02451.jpg" />
+    <Resource Include="Images\DSC08285.JPG" />
+    <Resource Include="Images\DSC08659.JPG" />
+    <Resource Include="Images\DSC09124.JPG" />
+    <Resource Include="Images\DSC09365.JPG" />
+    <Resource Include="Images\DSC09822.JPG" />
+    <Resource Include="Images\farbstreifen.png" />
+    <Resource Include="Images\grau.png" />
+    <Resource Include="Images\Mond.jpg" />
+    <Resource Include="Images\orange.png" />
+    <Resource Include="Images\Pattern3240x1080.png" />
+    <Resource Include="Images\rgbw.png" />
+    <Resource Include="Images\RoterRahmen.png" />
+    <Resource Include="Images\schwarz.png" />
+    <Resource Include="Images\test.png" />
+    <Resource Include="Images\weiss.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\D75_0008.jpg" />
+    <Resource Include="Images\DJI_0992-Pano.jpg" />
+    <Resource Include="Images\DSC00289.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pattern.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

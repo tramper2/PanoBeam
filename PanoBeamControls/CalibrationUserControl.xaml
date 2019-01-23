@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="PanoBeam.Controls.CalibrationUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:config="clr-namespace:PanoBeam.Configuration;assembly=PanoBeam.Configuration"
+             xmlns:controls="clr-namespace:PanoBeam.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <UserControl.Resources>
+        <controls:RadioButtonCheckedConverter x:Key="RadioButtonCheckedConverter" />
+    </UserControl.Resources>
+    <Border Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Anzahl Kontrollpunkte X-Achse" Grid.Row="0" Grid.Column="0" />
+            <ComboBox  Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ControlPointsCountXList}" SelectedValue="{Binding ControlPointsCountX}" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,0,0,10" />
+            <Label Content="Anzahl Kontrollpunkte Y-Achse" Grid.Row="1" Grid.Column="0" />
+            <ComboBox  Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ControlPointsCountYList}" SelectedValue="{Binding ControlPointsCountY}" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,0,0,10" />
+            <Label Content="Pattern-Grösse" Grid.Row="2" Grid.Column="0" />
+            <ComboBox  Grid.Row="2" Grid.Column="1" ItemsSource="{Binding PatternSizes}" SelectedValue="{Binding PatternSize}" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="10,0,0,10" />
+            <StackPanel Orientation="Vertical" Margin="10,0,0,10" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Button Content="Starten" Command="{Binding StartCommand}"/>
+                    <!--<Button Content="Aktualisieren" Command="{Binding UpdateSettingsCommand}" Margin="10,0,0,0"/>-->
+                </StackPanel>
+                <GroupBox Header="Kontrollpunkt-Modus" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Vertical">
+                        <RadioButton Content="Keine" GroupName="ControlPointsMode" Margin="0,0,0,10" IsChecked="{Binding ControlPointsMode, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static config:ControlPointsMode.None}}"/>
+                        <RadioButton Content="Kalibrierung" Margin="0,0,0,10" GroupName="ControlPointsMode" 
+                                     IsChecked="{Binding ControlPointsMode, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static config:ControlPointsMode.Calibration}}"/>
+                        <RadioButton Content="Blacklevel" Margin="0,0,0,10" GroupName="ControlPointsMode" IsChecked="{Binding ControlPointsMode, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static config:ControlPointsMode.Blacklevel}}"/>
+                        <RadioButton Content="Blacklevel 2" Visibility="Collapsed" Margin="0,0,0,10" GroupName="ControlPointsMode" IsChecked="{Binding ControlPointsMode, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static config:ControlPointsMode.Blacklevel2}}"/>
+                        <RadioButton Content="Blendbereich" Visibility="Collapsed" GroupName="ControlPointsMode" IsChecked="{Binding ControlPointsMode, Converter={StaticResource RadioButtonCheckedConverter}, ConverterParameter={x:Static config:ControlPointsMode.Blendregion}}"/>
+                    </StackPanel>
+                </GroupBox>
+                <CheckBox IsChecked="{Binding ShowWireframe}" Content="Drahtgitter anzeigen" Margin="0,0,0,10" />
+                <CheckBox IsChecked="{Binding ControlPointsInsideOverlap}" Content="Kontrollpunkte innerhalb Überlappung" Margin="0,0,0,10" />
+                <CheckBox IsChecked="{Binding KeepCorners}" Content="Ecken beibehalten" Margin="0,0,0,10" />
+                <CheckBox IsChecked="{Binding ImmediateWarp}" Content="Warp bei Verschiebung von Punkten" Margin="0,0,0,10" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

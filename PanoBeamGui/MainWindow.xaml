@@ -1,0 +1,106 @@
+﻿<controls:MetroWindow x:Class="PanoBeam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="PanoBeam" 
+        TitleCharacterCasing="Normal"
+        Height="800" Width="1000"
+        Icon="IconPB.ico"
+        GlowBrush="{DynamicResource AccentColorBrush}" Closing="MainWindow_OnClosing">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <controls:MetroWindow.LeftWindowCommands>
+        <controls:WindowCommands>
+            <ToggleButton
+                    ToolTip="{Binding ScreenButtonToolTip, Mode=OneWay}"
+                    IsChecked="{Binding IsScreenVisible}">
+                <Rectangle Width="22"
+                           Height="22"
+                           Fill="{Binding RelativeSource={RelativeSource AncestorType=ToggleButton}, Path=Foreground}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform"
+                                     Visual="{StaticResource appbar_projector_screen}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </ToggleButton>
+        </controls:WindowCommands>
+    </controls:MetroWindow.LeftWindowCommands>
+    
+    <controls:MetroContentControl>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Menu Grid.Row="0"
+                  Margin="5"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Left">
+                <MenuItem Header="Datei">
+                    <MenuItem Header="Laden" Command="{Binding LoadCommand}" />
+                    <MenuItem Header="Speichern" Command="{Binding SaveCommand}" />
+                </MenuItem>
+                <MenuItem Header="Warp/Blend">
+                    <MenuItem Header="Warp" Command="{Binding WarpCommand}" />
+                    <MenuItem Header="UnWarp" Command="{Binding UnWarpCommand}" />
+                    <MenuItem Header="Blend" Command="{Binding BlendCommand}" />
+                    <MenuItem Header="UnBlend" Command="{Binding UnBlendCommand}" />
+                </MenuItem>
+            </Menu>
+
+            <controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl">
+                <TabItem Header="Kamera"
+                                 controls:ControlsHelper.HeaderFontSize="18">
+                    <ContentControl Content="{Binding CameraUserControl}"></ContentControl>
+                </TabItem>
+                <TabItem Header="Kalibrierung"
+                                 controls:ControlsHelper.HeaderFontSize="18">
+                    <!--<panoBeamControls:CalibrationUserControl Start="CalibrationUserControl_OnStart" x:Name="CalibrationUserControl"></panoBeamControls:CalibrationUserControl>-->
+                    <ContentControl Content="{Binding CalibrationUserControl}"></ContentControl>
+                </TabItem>
+
+                <TabItem Header="Blending" controls:ControlsHelper.HeaderFontSize="18">
+                    <ContentControl Content="{Binding BlendingUserControl}"></ContentControl>
+                </TabItem>
+
+                <TabItem Header="Testbilder" controls:ControlsHelper.HeaderFontSize="18">
+                    <ContentControl Content="{Binding TestImagesUserControl}"></ContentControl>
+                </TabItem>
+
+            </controls:MetroAnimatedSingleRowTabControl>
+
+            <StatusBar Grid.Row="2">
+                <StatusBarItem>Ⓒ 2017 by alphasoft marco wittwer</StatusBarItem>
+                <StatusBarItem HorizontalAlignment="Right">superpanorama.ch</StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </controls:MetroContentControl>
+
+</controls:MetroWindow>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

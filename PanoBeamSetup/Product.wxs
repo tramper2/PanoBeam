@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <?define VersionNumber="!(bind.FileVersion.PanoBeamGui)" ?>
+	<Product Id="*" Name="PanoBeam" Language="1033" Version="$(var.VersionNumber)" 
+           Manufacturer="alphasoft marco wittwer" 
+           UpgradeCode="572d3cf1-11a5-400c-9749-0de4398532fa">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="Icon.exe" SourceFile="$(var.PanoBeamGui.TargetPath)"/>
+    <Property Id="ARPPRODUCTICON" Value="Icon.exe" />
+
+		<Feature Id="ProductFeature" Title="PanoBeamSetup" Level="1">
+			<ComponentRef Id="ProductComponent" />
+      <ComponentGroupRef Id="ProductConfig" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+		</Feature>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <UIRef Id="UserInterface" />
+    <PropertyRef Id="NETFRAMEWORK45" />
+    <Condition Message="This application requires .NET Framework 4.5.">Installed OR NETFRAMEWORK45</Condition>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MANUFACTURERFOLDER" Name="alphasoft marco wittwer">
+          <Directory Id="INSTALLLOCATION" Name="PanoBeam">
+            <Component Id="ProductComponent" Guid="A3E06913-8525-4D09-90BB-856FB4246491">
+              <File Id="PanoBeamGui" KeyPath="yes" Source="$(var.PanoBeamGui.TargetPath)" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeamLib.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Accord.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Accord.Imaging.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Accord.Math.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Accord.Video.DirectShow.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Accord.Video.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)MahApps.Metro.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)NvAPIWrapper.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.BlendControls.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.Common.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.Configuration.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.Mapper.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.Controls.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)PanoBeam.Events.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)Pngcs.dll" />
+              <File Source="$(var.PanoBeamGui.TargetDir)System.Windows.Interactivity.dll" />
+              <File Source="$(var.PanoBeam.TargetPath)" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="MANUFACTURERCONFIGFOLDER" Name="alphasoft marco wittwer">
+          <Directory Id="CONFIGFOLDER" Name="PanoBeam">
+          </Directory>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"></Directory>
+    </Directory>
+  </Product>
+
+  <Fragment>
+    <ComponentGroup Id="ProductConfig" Directory="CONFIGFOLDER">
+      <Component Id="ConfigComponent" Guid="5E0577D4-CA71-4703-A8C9-C1CAFC764E52" Permanent="yes">
+        <File Source="$(var.SolutionDir)Deployment\ProgramData\alphasoft\PanoBeam\PanoBeamSettings.config">
+          <Permission User="Everyone" GenericAll="yes" ChangePermission="yes"/>
+        </File>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  <Fragment>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="B95E7328-CE40-4314-B116-1D94E3A02025">
+        <Shortcut Id="ApplicationDesktopShortcutGui" Name="PanoBeam" 
+                  Target="[INSTALLLOCATION]PanoBeamGui.exe" 
+                  WorkingDirectory="INSTALLLOCATION" />
+        <Shortcut Id="ApplicationDesktopShortcut" Name="PanoBeam Konfiguration ausführen"
+                  Target="[INSTALLLOCATION]PanoBeam.exe"
+                  Arguments="&quot;[CONFIGFOLDER]PanoBeam.config&quot;"
+                  WorkingDirectory="INSTALLLOCATION" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\alphasoft marco wittwer\PanoBeam" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+</Wix>
